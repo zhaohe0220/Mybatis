@@ -51,7 +51,7 @@
         )
     </delete>
 
-    <insert id="insert" parameterType="com.mybatis.bean.Message">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.mybatis.bean.Message">
         INSERT INTO message(command,description,content) VALUES (#{command},#{description},#{content})
     </insert>
 
