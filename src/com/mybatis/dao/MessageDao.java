@@ -106,4 +106,53 @@ public class MessageDao {
         }
     }
 
+    public void insert(Message message){
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            sqlSession.insert("Message.insert",message);
+            sqlSession.commit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(sqlSession!=null){
+                sqlSession.close();
+            }
+        }
+    }
+
+    public Message selectById(Integer id){
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        Message message = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            message = sqlSession.selectOne("Message.selectById",id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(sqlSession!=null){
+                sqlSession.close();
+            }
+        }
+        return message;
+    }
+
+    public void update(Message message){
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            sqlSession.update("Message.update",message);
+            sqlSession.commit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(sqlSession!=null){
+                sqlSession.close();
+            }
+        }
+    }
+
 }

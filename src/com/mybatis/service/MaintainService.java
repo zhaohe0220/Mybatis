@@ -1,5 +1,6 @@
 package com.mybatis.service;
 
+import com.mybatis.bean.Message;
 import com.mybatis.dao.MessageDao;
 
 import java.util.ArrayList;
@@ -23,6 +24,28 @@ public class MaintainService {
             list.add(Integer.valueOf(id));
         }
         messageDao.deleteBatch(list);
+    }
+
+    public void insert(Message message){
+        MessageDao messageDao = new MessageDao();
+        messageDao.insert(message);
+    }
+
+    public Message selectById(String id){
+        Message message=null;
+        if(id!=null&&!"".equals(id.trim())){
+            MessageDao messageDao = new MessageDao();
+            message = messageDao.selectById(Integer.valueOf(id));
+        }
+        return message;
+    }
+
+    public void update(Message message,String id){
+        MessageDao messageDao = new MessageDao();
+        if(id!=null&&!"".equals(id.trim())){
+            message.setId(Integer.valueOf(id));
+        }
+        messageDao.update(message);
     }
 
 }

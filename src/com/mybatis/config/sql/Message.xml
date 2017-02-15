@@ -51,4 +51,16 @@
         )
     </delete>
 
+    <insert id="insert" parameterType="com.mybatis.bean.Message">
+        INSERT INTO message(command,description,content) VALUES (#{command},#{description},#{content})
+    </insert>
+
+    <select id="selectById" parameterType="int" resultMap="MessageResult">
+        SELECT id,command,description,content FROM message WHERE id = ${_parameter}
+    </select>
+
+    <update id="update" parameterType="com.mybatis.bean.Message">
+        UPDATE message SET command = #{command},description=#{description},content=#{content} WHERE id = #{id}
+    </update>
+
 </mapper>

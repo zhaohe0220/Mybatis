@@ -46,4 +46,40 @@
         <servlet-name>AutoReplyServlet</servlet-name>
         <url-pattern>/AutoReplyServlet.action</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addMessage</servlet-name>
+        <servlet-class>com.mybatis.servlet.addMessage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addMessage</servlet-name>
+        <url-pattern>/addMessage.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insert</servlet-name>
+        <servlet-class>com.mybatis.servlet.Insert</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insert</servlet-name>
+        <url-pattern>/insert.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>editMessage</servlet-name>
+        <servlet-class>com.mybatis.servlet.editMessage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editMessage</servlet-name>
+        <url-pattern>/editMessage.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>update</servlet-name>
+        <servlet-class>com.mybatis.servlet.Update</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>update</servlet-name>
+        <url-pattern>/update.action</url-pattern>
+    </servlet-mapping>
 </web-app>

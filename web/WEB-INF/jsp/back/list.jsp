@@ -39,7 +39,7 @@
                 <th>序号</th>
                 <th>指令名称</th>
                 <th>描述</th>
-                <th>操作</th>
+                <th colspan="2">操作</th>
             </tr>
             <c:forEach items="${messageList}" var="message" varStatus="status">
                 <tr <c:if test="${status.index % 2 != 0}"> style="background-color: #ECF6EE" </c:if>>
@@ -50,11 +50,17 @@
                     <td>
                         <a href="${basePath}DeleteOneServlet.action?id=${message.id}">删除</a>
                     </td>
+                    <td>
+                        <a href="${basePath}editMessage.action?id=${message.id}">编辑</a>
+                    </td>
                 </tr>
             </c:forEach>
             <tr>
                 <td>
                    <a href="javascript:deleteBatch('<%=basePath%>');">批量删除</a>
+                </td>
+                <td>
+                    <a href="<%=basePath%>addMessage.action">添加信息</a>
                 </td>
             </tr>
         </table>
