@@ -40,11 +40,11 @@ public class MaintainService {
         return message;
     }
 
-    public void update(Message message,String id){
+    public void update(Message message){
         MessageDao messageDao = new MessageDao();
-        if(id!=null&&!"".equals(id.trim())){
+        /*if(id!=null&&!"".equals(id.trim())){
             message.setId(Integer.valueOf(id));
-        }
+        }*/
         messageDao.update(message);
     }
 

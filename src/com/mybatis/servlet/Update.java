@@ -27,12 +27,12 @@ public class Update extends HttpServlet {
         String description = req.getParameter("description");
         String content = req.getParameter("content");
         Message message = new Message();
-        /*message.setId(Integer.valueOf(id));*/
+        message.setId(Integer.valueOf(id));
         message.setCommand(command);
         message.setDescription(description);
         message.setContent(content);
         MaintainService maintainService = new MaintainService();
-        maintainService.update(message,id);
+        maintainService.update(message);
         req.getRequestDispatcher("/List.action").forward(req,resp);
     }
 }
