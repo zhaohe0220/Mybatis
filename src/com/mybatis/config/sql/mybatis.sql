@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-02-15 13:18:14
+Date: 2017-02-16 15:52:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,9 +61,15 @@ CREATE TABLE `message` (
   `description` varchar(32) DEFAULT NULL,
   `content` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-INSERT INTO `message` VALUES ('1', '查看', '输入查看', null);
+INSERT INTO `message` VALUES ('18', 'command01', 'des01', 'content01');
+INSERT INTO `message` VALUES ('19', 'command02', 'des02', 'content02');
+INSERT INTO `message` VALUES ('20', 'command03', 'des03', 'content03');
+INSERT INTO `message` VALUES ('21', 'command04', 'des04', 'content04');
+INSERT INTO `message` VALUES ('22', 'command05', 'des05', 'content05');
+INSERT INTO `message` VALUES ('23', 'command06', 'des06', 'content06');
+INSERT INTO `message` VALUES ('24', 'command07', 'des07', 'content07');
