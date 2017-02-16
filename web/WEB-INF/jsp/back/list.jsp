@@ -67,7 +67,7 @@
         </table>
         <div>
             <input type="hidden" name="currentPage" id="currentPage" value="${page.currentPage}">
-            共${page.totalNumber}页<br>
+            共${page.totalNumber}条记录<br>
             <c:if test="${page.currentPage != 1}">
                 <a href="javascript:changeCurrentPage('1')">首页</a>
                 <a href="javascript:changeCurrentPage(${page.currentPage - 1})">上一页</a>
