@@ -18,6 +18,7 @@
     <script src="<%=basePath%>resources/js/list.js"></script>
 </head>
 <body>
+<h4>${error}</h4>
     <form action="<%=basePath%>List.action" method="post" id="mainForm">
         <table>
             <tr>
@@ -64,6 +65,22 @@
                 </td>
             </tr>
         </table>
+        <div>
+            <input type="hidden" name="currentPage" id="currentPage" value="${page.currentPage}">
+            共${page.totalNumber}页<br>
+            <c:if test="${page.currentPage != 1}">
+                <a href="javascript:changeCurrentPage('1')">首页</a>
+                <a href="javascript:changeCurrentPage(${page.currentPage - 1})">上一页</a>
+            </c:if>
+            当前${page.currentPage}/${page.totalPage}页
+            <c:if test="${page.currentPage != page.totalPage}">
+                <a href="javascript:changeCurrentPage(${page.currentPage + 1})">下一页</a>
+                <a href="javascript:changeCurrentPage(${page.totalPage})">尾页</a>
+            </c:if>
+        </div>
     </form>
+
+
+
 </body>
 </html>

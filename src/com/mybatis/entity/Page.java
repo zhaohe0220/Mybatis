@@ -40,6 +40,7 @@ public class Page {
 
     public void setTotalNumber(int totalNumber) {
         this.totalNumber = totalNumber;
+        this.count();
     }
 
     public int getCurrentPage() {

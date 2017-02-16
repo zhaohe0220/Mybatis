@@ -29,14 +29,17 @@
     <result column="content" jdbcType="VARCHAR" property="content"/>
   </resultMap>
 
-  <select id="find" parameterType="com.mybatis.bean.Message" resultMap="MessageResult">
-      SELECT id,command,description,content FROM message WHERE 1 = 1
-      <if test="command != null and !&quot;&quot;.equals(command.trim())">
-          AND command=#{command}
-      </if>
-      <if test="description != null and !&quot;&quot;.equals(description.trim())">
-          AND description LIKE '%' #{description} '%'
-      </if>
+  <select id="find" parameterType="java.util.Map" resultMap="MessageResult">
+      SELECT id,command,description,content FROM message
+      <where>
+          <if test="message.command != null and !&quot;&quot;.equals(message.command.trim())">
+              AND command=#{message.command}
+          </if>
+          <if test="message.description != null and !&quot;&quot;.equals(message.description.trim())">
+              AND description LIKE '%' #{message.description} '%'
+          </if>
+      </where>
+      ORDER BY id limit #{page.dbIndex},#{page.dbNumber}
   </select>
 
     <delete id="deleteOne" parameterType="int">
@@ -62,5 +65,16 @@
     <update id="update" parameterType="com.mybatis.bean.Message">
         UPDATE message SET command = #{command},description=#{description},content=#{content} WHERE id = #{id}
     </update>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO message(command,description,content) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.command},#{item.description},#{item.content})
+        </foreach>
+    </insert>
+
+    <select id="count" parameterType="com.mybatis.bean.Message" resultType="int">
+        SELECT COUNT(*) FROM message
+    </select>
 
 </mapper>

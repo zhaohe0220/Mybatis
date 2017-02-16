@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yunfei on 2017/2/14.
@@ -51,18 +52,15 @@ public class MessageDao {
         return messageList;
     }*/
 
-    public List<Message> queryMessageList(String command, String description) {
+    public List<Message> queryMessageList(Map<String,Object> parameter) {
         DBAccess dbAccess = new DBAccess();
         List<Message> messageList = new ArrayList<>();
         SqlSession sqlSession = null;
         try {
             sqlSession = dbAccess.getSqlSession();
-            Message message = new Message();
-            message.setCommand(command);
-            message.setDescription(description);
             //执行sql;
             IMessage iMessage = sqlSession.getMapper(IMessage.class);
-            messageList = iMessage.find(message);
+            messageList = iMessage.find(parameter);
 //            messageList = sqlSession.selectList("Message.find",message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,7 +78,9 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //执行sql;
-            sqlSession.delete("Message.deleteOne",id);
+            /*sqlSession.delete("Message.deleteOne",id);*/
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            iMessage.deleteOne(id);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,7 +97,9 @@ public class MessageDao {
         try {
             sqlSession = dbAccess.getSqlSession();
             //执行sql;
-            sqlSession.delete("Message.deleteBatch",ids);
+//            sqlSession.delete("Message.deleteBatch",ids);
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            iMessage.deleteBatch(ids);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,7 +115,9 @@ public class MessageDao {
         SqlSession sqlSession = null;
         try {
             sqlSession = dbAccess.getSqlSession();
-            sqlSession.insert("Message.insert",message);
+//            sqlSession.insert("Message.insert",message);
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            iMessage.insert(message);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,7 +134,9 @@ public class MessageDao {
         Message message = null;
         try {
             sqlSession = dbAccess.getSqlSession();
-            message = sqlSession.selectOne("Message.selectById",id);
+//            message = sqlSession.selectOne("Message.selectById",id);
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            iMessage.selectOne(id);
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -146,7 +152,9 @@ public class MessageDao {
         SqlSession sqlSession = null;
         try {
             sqlSession = dbAccess.getSqlSession();
-            sqlSession.update("Message.update",message);
+//            sqlSession.update("Message.update",message);
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            iMessage.update(message);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
@@ -155,6 +163,24 @@ public class MessageDao {
                 sqlSession.close();
             }
         }
+    }
+
+    public int count(){
+        DBAccess dbAccess = new DBAccess();
+        SqlSession sqlSession = null;
+        int result = 0;
+        try {
+            sqlSession = dbAccess.getSqlSession();
+            IMessage iMessage = sqlSession.getMapper(IMessage.class);
+            result = iMessage.count();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(sqlSession!=null){
+                sqlSession.close();
+            }
+        }
+        return result;
     }
 
 }

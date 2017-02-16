@@ -2,21 +2,32 @@ package com.mybatis.service;
 
 import com.mybatis.bean.Command;
 import com.mybatis.bean.CommandContent;
-import com.mybatis.dao.CommandDao;
-import com.mybatis.util.Iconst;
 import com.mybatis.bean.Message;
+import com.mybatis.dao.CommandDao;
 import com.mybatis.dao.MessageDao;
+import com.mybatis.entity.Page;
+import com.mybatis.util.Iconst;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
  * Created by yunfei on 2017/2/14.
  */
 public class QueryService {
-    public List<Message> queryMessageList(String command,String description){
+    public List<Message> queryMessageList(String command, String description, Page page){
         MessageDao messageDao = new MessageDao();
-        return messageDao.queryMessageList(command,description);
+        int totalNumber = messageDao.count();
+        page.setTotalNumber(totalNumber);
+        Message message = new Message();
+        message.setCommand(command);
+        message.setDescription(description);
+        Map<String,Object> parameter = new HashMap<String,Object>();
+        parameter.put("message",message);
+        parameter.put("page",page);
+        return messageDao.queryMessageList(parameter);
     }
 
     public String queryByCommand(String command){
