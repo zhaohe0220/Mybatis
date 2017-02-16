@@ -29,6 +29,11 @@
   <typeAliases>
     <typeAlias alias="UserAlias" type="org.apache.ibatis.submitted.complex_property.User"/>
   </typeAliases>-->
+  <plugins>
+    <plugin interceptor="com.mybatis.interceptor.PageInterceptor">
+      <property name="test" value="abc"/>
+    </plugin>
+  </plugins>
 
   <environments default="development">
     <environment id="development">
